@@ -35,7 +35,7 @@ class App extends Component {
       noteText: null,
       loadingSlots: true,
       loadingUser: true,
-      error: false,
+      error: null,
     }
   }
 
@@ -43,7 +43,7 @@ class App extends Component {
     fetch(`${API_ENDPOINT}/availableSlots`)
       .then(res => {
         if (res.status !== 200) {
-          throw new Error()
+          throw new Error('Appointments could not be retrieved')
         }
         return res.json()
       })
@@ -54,12 +54,17 @@ class App extends Component {
           loadingSlots: false,
         })
       })
-      .catch(() => this.setState({ error: true, loadingSlots: false }))
+      .catch(e =>
+        this.setState({
+          error: e.toString().replace('Error: ', ''),
+          loadingSlots: false,
+        })
+      )
 
     fetch(`${API_ENDPOINT}/users/${this.state.userId}`)
       .then(res => {
         if (res.status !== 200) {
-          throw new Error()
+          throw new Error('User data could not be retrieved')
         }
         return res.json()
       })
@@ -69,7 +74,14 @@ class App extends Component {
           loadingUser: false,
         })
       })
-      .catch(() => this.setState({ error: true, loadingUser: false }))
+      .catch(
+        e =>
+          console.log(e) ||
+          this.setState({
+            error: e.toString().replace('Error: ', ''),
+            loadingUser: false,
+          })
+      )
   }
 
   getUserInitials() {
@@ -137,10 +149,15 @@ class App extends Component {
         <div className="appointment-section">
           <h2 className="h6">New appointment</h2>
           {this.state.error ? (
-            <p>
-              Sorry, there was an error requesting server data. Please call our
-              helpline.
-            </p>
+            <Fragment>
+              <h4>
+                Sorry, there was an error retrieving data! Please call our team
+                to make an appointment.
+              </h4>
+              <p>
+                <i>Error detail: {this.state.error}.</i>
+              </p>
+            </Fragment>
           ) : (
             <Fragment>
               <UserInfo userInfo={this.state.userInfo} />
