@@ -7,7 +7,7 @@ const UserInfo = props => {
   const name = `${props.userInfo.firstName} ${props.userInfo.lastName}`
 
   return (
-    <div className="component-wrapper">
+    <div className="user-info">
       <div className="avatar-wrapper">
         <img className="avatar" src={props.userInfo.avatar} alt="User avatar" />
         <p className="username">{name}</p>

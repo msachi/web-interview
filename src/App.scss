@@ -2,15 +2,16 @@
 
 .app {
   font-family: 'Nunito', sans-serif;
-}
 
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: $gutter-size--large 24px;
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $gutter-size--large 24px;  
+    border-bottom: $border-standard;
+  }
 
-  img {
+  .header-image {
     max-height: 33px;
   }
 
@@ -22,24 +23,7 @@
     border-radius: 50%;
   }
 
-  border-bottom: $border-standard;
-}
-
-h2 {
-  &.h6 {
-    font-family: sans-serif;
-    font-size: 30px;
-    color: $bold-text-color;
+  .user-error {
+    text-align: center;
   }
-}
-
-.appointment-section {
-  width: calc(100% - 24px);
-  max-width: 600px;
-  margin: 24px auto;
-}
-
-.section-border {
-  border-bottom: $border-standard;
-  margin-bottom: 24px;
 }
