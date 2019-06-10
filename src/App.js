@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import moment from 'moment'
 
 import logo from './logo.png'
@@ -31,32 +31,43 @@ class App extends Component {
       selectedAppointmentType: 'video',
       selectedAppointmentTime: '',
       noteText: null,
+      loadingSlots: true,
+      loadingUser: true,
+      error: false,
     }
   }
 
   componentDidMount() {
     fetch(`${API_ENDPOINT}/availableSlots`)
-      .then(res => res.json())
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error()
+        }
+        return res.json()
+      })
       .then(json => {
         this.setState({
           availableSlots: json,
           selectedAppointmentTime: json.map(slot => slot.time)[0],
+          loadingSlots: false,
         })
       })
-      .catch(() => {
-        ''
-        // TODO: Handle error here
-      })
+      .catch(() => this.setState({ error: true, loadingSlots: false }))
 
     fetch(`${API_ENDPOINT}/users/${this.state.userId}`)
-      .then(res => res.json())
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error()
+        }
+        return res.json()
+      })
       .then(json => {
-        this.setState({ userInfo: json })
+        this.setState({
+          userInfo: json,
+          loadingUser: false,
+        })
       })
-      .catch(() => {
-        ''
-        // TODO: Handle error here
-      })
+      .catch(() => this.setState({ error: true, loadingUser: false }))
   }
 
   formatTitle(title) {
@@ -87,7 +98,8 @@ class App extends Component {
       .appointmentType.sort((a, b) => b.localeCompare - a.localeCompare)
   }
 
-  onSubmitAppointment() {
+  onSubmitAppointment(e) {
+    e.preventDefault()
     return fetch(`${API_ENDPOINT}/appointments`, {
       method: 'POST',
       headers: {
@@ -100,11 +112,12 @@ class App extends Component {
         consultantType: this.state.selectedConsultantType,
         appointmentType: this.state.selectedAppointmentType,
       }),
-    }).then(response => response.json()) // parses JSON response into native Javascript objects
+    })
   }
 
   render() {
-    if (!this.state.availableSlots.length || !this.state.userInfo) return null
+    if (this.state.loadingSlots || this.state.loadingUser) return null
+
     return (
       <div className="app">
         <div className="app-header">
@@ -112,40 +125,52 @@ class App extends Component {
         </div>
         <div style={{ maxWidth: 600, margin: '24px auto' }}>
           <h2 className="h6">New appointment</h2>
-          <UserInfo userInfo={this.state.userInfo} />
-          <form onSubmit={() => this.onSubmitAppointment()}>
-            <SelectSection
-              title="Consultant Type"
-              buttons={this.getConsultantTypes().map(type => ({
-                title: this.formatTitle(type),
-                onClick: () => this.setState({ selectedConsultantType: type }),
-                active: this.state.selectedConsultantType === type,
-              }))}
-            />
-            <SelectSection
-              title="Date & Time"
-              buttons={this.getAppointmentTimes().map((time, i) => ({
-                title: moment(time).calendar(),
-                onClick: () => this.setState({ selectedAppointmentTime: time }),
-                active: this.state.selectedAppointmentTime === time,
-              }))}
-            />
-            <SelectSection
-              title="Appointment Type"
-              buttons={this.getAppointmentTypes().map(type => ({
-                title: this.formatTitle(type),
-                onClick: () => this.setState({ selectedAppointmentType: type }),
-                active: this.state.selectedAppointmentType === type,
-              }))}
-            />
-            <NotesSection
-              title="Notes"
-              placeholder="Describe your symptoms"
-              text={this.state.noteText}
-              onTextChange={noteText => this.setState({ noteText })}
-            />
-            <SubmitButton title="Book appointment" />
-          </form>
+          {this.state.error ? (
+            <p>
+              Sorry, there was an error requesting server data. Please call our
+              helpline.
+            </p>
+          ) : (
+            <Fragment>
+              <UserInfo userInfo={this.state.userInfo} />
+              <form onSubmit={e => this.onSubmitAppointment(e)}>
+                <SelectSection
+                  title="Consultant Type"
+                  buttons={this.getConsultantTypes().map(type => ({
+                    title: this.formatTitle(type),
+                    onClick: () =>
+                      this.setState({ selectedConsultantType: type }),
+                    active: this.state.selectedConsultantType === type,
+                  }))}
+                />
+                <SelectSection
+                  title="Date & Time"
+                  buttons={this.getAppointmentTimes().map((time, i) => ({
+                    title: moment(time).calendar(),
+                    onClick: () =>
+                      this.setState({ selectedAppointmentTime: time }),
+                    active: this.state.selectedAppointmentTime === time,
+                  }))}
+                />
+                <SelectSection
+                  title="Appointment Type"
+                  buttons={this.getAppointmentTypes().map(type => ({
+                    title: this.formatTitle(type),
+                    onClick: () =>
+                      this.setState({ selectedAppointmentType: type }),
+                    active: this.state.selectedAppointmentType === type,
+                  }))}
+                />
+                <NotesSection
+                  title="Notes"
+                  placeholder="Describe your symptoms"
+                  text={this.state.noteText}
+                  onTextChange={noteText => this.setState({ noteText })}
+                />
+                <SubmitButton title="Book appointment" />
+              </form>
+            </Fragment>
+          )}
         </div>
       </div>
     )
