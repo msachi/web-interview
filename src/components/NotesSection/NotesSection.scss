@@ -1,0 +1,21 @@
+@import '../../constants.scss';
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  margin-top: 0px;
+}
+
+.textbox {
+  height: 100px;
+  width: calc(100% - 30px);
+  border-radius: 10px;
+  border: 1px solid $secondary-light;
+  padding: 15px;
+  
+  &:focus {
+    outline: 0;
+  }
+}
