@@ -18,7 +18,7 @@ const UserInfo = props => {
 }
 
 UserInfo.propTypes = {
-  userInfo: PropTypes.Object,
+  userInfo: PropTypes.object,
 }
 
 export default UserInfo

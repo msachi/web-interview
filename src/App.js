@@ -13,7 +13,7 @@ import SubmitButton from './components/Button/SubmitButton'
 
 import './App.scss'
 
-moment.locale('en', {
+moment.updateLocale('en', {
   calendar: {
     sameDay: '[Today at] kk:mm',
     nextDay: '[Tomorrow at] kk:mm',
@@ -32,7 +32,7 @@ class App extends Component {
       selectedConsultantType: 'gp',
       selectedAppointmentType: 'video',
       selectedAppointmentTime: '',
-      noteText: null,
+      noteText: '',
       loadingSlots: true,
       loadingUser: true,
       error: null,
@@ -127,7 +127,7 @@ class App extends Component {
       body: JSON.stringify({
         userId: this.state.userId,
         dateTime: this.state.selectedAppointmentTime,
-        notes: this.state.noteText,
+        notes: this.state.noteText || null,
         consultantType: this.state.selectedConsultantType,
         appointmentType: this.state.selectedAppointmentType,
       }),

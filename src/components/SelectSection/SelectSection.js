@@ -9,7 +9,7 @@ import icon from '../../images/icon.png'
 const SelectSection = props => (
   <div className="select-section">
     <div className="header">
-      <img className="icon" src={icon} />
+      <img className="icon" src={icon} alt="Section icon" />
       <h4 className="title">{props.title}</h4>
     </div>
     <div className="button-wrapper">
@@ -27,7 +27,7 @@ const SelectSection = props => (
 
 SelectSection.propTypes = {
   title: PropTypes.string,
-  buttons: PropTypes.arrayOf(PropTypes.Object),
+  buttons: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default SelectSection

@@ -7,7 +7,7 @@ import icon from '../../images/icon.png'
 const NotesSection = props => (
   <div className="notes-section">
     <div className="header">
-      <img className="icon" src={icon} />
+      <img className="icon" src={icon} alt="Section icon" />
       <h4 className="title">{props.title}</h4>
     </div>
     <textarea
@@ -23,7 +23,7 @@ NotesSection.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   placeholder: PropTypes.string,
-  onTextChange: PropTypes.function,
+  onTextChange: PropTypes.func,
 }
 
 export default NotesSection

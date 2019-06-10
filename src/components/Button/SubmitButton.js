@@ -11,7 +11,7 @@ const SubmitButton = props => (
 
 SubmitButton.propTypes = {
   title: PropTypes.string,
-  onClick: PropTypes.function,
+  onClick: PropTypes.func,
 }
 
 export default SubmitButton
