@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "json-server": "^0.14.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.10.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
