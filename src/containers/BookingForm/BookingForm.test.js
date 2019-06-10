@@ -18,6 +18,7 @@ afterEach(() => {
 
 const mockData = {
   [API_ENDPOINT + '/availableSlots']: data.availableSlots,
+  [API_ENDPOINT + '/appointments']: data.appointments,
 }
 
 global.fetch = jest.fn().mockImplementation(url => {
@@ -27,23 +28,33 @@ global.fetch = jest.fn().mockImplementation(url => {
   })
 })
 
-test('Renders correct options and submits correct appointment data', () => {
+test('Renders correct options and submits correct appointment data', async () => {
   const userInfo = data.users[0]
   const { getByText, getByPlaceholderText } = render(
     <BookingForm userInfo={userInfo} />
   )
 
-  return waitForElement(() => getByText('Specialist')).then(() => {
-    const specialistButton = getByText('Specialist')
-    const timeButton = getByText('1st Dec at 14:16')
-    const audioButton = getByText('Audio')
-    const notesBox = getByPlaceholderText('Describe your symptoms')
-    const submitButton = getByText('Book appointment')
+  const specialistButton = await waitForElement(() => getByText('Specialist'))
 
-    fireEvent.click(specialistButton)
-    fireEvent.click(timeButton)
-    fireEvent.click(audioButton)
-    fireEvent.change(notesBox, { target: { value: 'I have a terrible fever' } })
-    fireEvent.click(submitButton)
-  })
+  const timeButton = getByText('1st Dec at 14:16')
+  const audioButton = getByText('Audio')
+  const notesBox = getByPlaceholderText('Describe your symptoms')
+  const submitButton = getByText('Book appointment')
+
+  fireEvent.click(specialistButton)
+  fireEvent.click(timeButton)
+  fireEvent.click(audioButton)
+  fireEvent.change(notesBox, { target: { value: 'I have a terrible fever' } })
+  fireEvent.click(submitButton)
+
+  expect(global.fetch).toHaveBeenLastCalledWith(
+    'http://localhost:3010/appointments',
+    {
+      body:
+        '{"dateTime":"2019-12-01T14:16:30.000Z","notes":"I have a terrible fever","consultantType":"specialist","appointmentType":"audio"}',
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+    }
+  )
+  expect(global.fetch).toHaveBeenCalledTimes(2)
 })
