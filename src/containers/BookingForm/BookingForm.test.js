@@ -5,17 +5,35 @@ import {
   fireEvent,
   waitForElement,
 } from '@testing-library/react'
-import App from './App'
+
+import data from '../../../data/data.json'
+import { API_ENDPOINT } from '../../config'
+
+import BookingForm from './BookingForm'
 
 afterEach(() => {
   cleanup()
   jest.clearAllMocks()
 })
 
-test('Renders correct options and submits correct appointment data', () => {
-  const { getByText, getByPlaceholderText } = render(<App />)
+const mockData = {
+  [API_ENDPOINT + '/availableSlots']: data.availableSlots,
+}
 
-  waitForElement(() => getByText('Specialist')).then(() => {
+global.fetch = jest.fn().mockImplementation(url => {
+  return Promise.resolve({
+    status: 200,
+    json: () => Promise.resolve(mockData[url]),
+  })
+})
+
+test('Renders correct options and submits correct appointment data', () => {
+  const userInfo = data.users[0]
+  const { getByText, getByPlaceholderText } = render(
+    <BookingForm userInfo={userInfo} />
+  )
+
+  return waitForElement(() => getByText('Specialist')).then(() => {
     const specialistButton = getByText('Specialist')
     const timeButton = getByText('1st Dec at 14:16')
     const audioButton = getByText('Audio')
