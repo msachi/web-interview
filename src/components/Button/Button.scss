@@ -1,0 +1,31 @@
+@import '../../constants.scss';
+
+.button {
+  display: inline-block;
+  text-align: center;
+  color: $secondary-dark;
+  background-color: white;
+  border: 1px solid $secondary-light;
+  border-radius: 20px;
+  margin: 0 $gutter-size--large;
+  padding: 7px 15px;
+  cursor: pointer;
+
+  &--active {
+    color: white;
+    background-color: $positive;
+    border: 1px solid $positive;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.submit-button {
+  @extend .button;
+  @extend .button--active;
+  width: 100%;
+  border-radius: 5px;
+  margin: 0;
+}
