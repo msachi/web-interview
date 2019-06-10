@@ -4,10 +4,14 @@ import PropTypes from 'prop-types'
 import Button from '../Button/Button'
 
 import './SelectSection.scss'
+import icon from '../../images/icon.png'
 
 const SelectSection = props => (
-  <div className="section">
-    <h3 className="section-title">{props.title}</h3>
+  <div className="select-section">
+    <div className="header">
+      <img className="icon" src={icon} />
+      <h4 className="title">{props.title}</h4>
+    </div>
     <div className="button-wrapper">
       {props.buttons.map(b => (
         <Button

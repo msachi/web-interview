@@ -1,21 +1,35 @@
 @import '../../constants.scss';
 
-.section {
-  margin-bottom: 20px;
-}
+.notes-section {
+  margin-bottom: 24px;
 
-.section-title {
-  margin-top: 0px;
-}
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-.textbox {
-  height: 100px;
-  width: calc(100% - 30px);
-  border-radius: 10px;
-  border: 1px solid $secondary-light;
-  padding: 15px;
+  .icon {
+    height: 28px;
+    width: 28px;
+    margin-right: 10px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin: 0px;
+  }
   
-  &:focus {
-    outline: 0;
+  .textbox {
+    height: 100px;
+    width: calc(100% - 60px);
+    border-radius: 10px;
+    border: 1px solid $secondary-light;
+    margin-left: 30px;
+    padding: 15px;
+    
+    &:focus {
+      outline: 0;
+    }
   }
 }

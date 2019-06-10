@@ -1,15 +1,30 @@
 @import '../../constants.scss';
 
-.section {
-  margin-bottom: 20px;
-}
+.select-section {
+  margin-bottom: 24px;
 
-.section-title {
-  margin-top: 0px;
-}
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-.button-wrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
+  .icon {
+    height: 28px;
+    width: 28px;
+    margin-right: 10px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  
+  .button-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-left: 30px;
+  }
 }

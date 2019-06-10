@@ -2,10 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import './NotesSection.scss'
+import icon from '../../images/icon.png'
 
 const NotesSection = props => (
-  <div className="section">
-    <h3 className="section-title">{props.title}</h3>
+  <div className="notes-section">
+    <div className="header">
+      <img className="icon" src={icon} />
+      <h4 className="title">{props.title}</h4>
+    </div>
     <textarea
       className="textbox"
       placeholder={props.placeholder}
