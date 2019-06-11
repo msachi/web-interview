@@ -1,0 +1,29 @@
+@import '../../constants.scss';
+
+.app {
+  font-family: 'Nunito', sans-serif;
+
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $gutter-size--large 24px;  
+    border-bottom: $border-standard;
+  }
+
+  .header-image {
+    max-height: 33px;
+  }
+
+  .user-initials {
+    display: inline-block;
+    color: white;
+    background: $icon-color;
+    padding: $gutter-size--large;
+    border-radius: 50%;
+  }
+
+  .user-error {
+    text-align: center;
+  }
+}

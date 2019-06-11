@@ -1,0 +1,37 @@
+@import '../../constants.scss';
+
+.notes-section {
+  border: 0;
+  margin: 0 0 15px 0;
+  padding: 0;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .icon {
+    height: 28px;
+    width: 28px;
+    margin-right: 10px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin: 0px;
+  }
+  
+  .textbox {
+    height: 100px;
+    width: calc(100% - 60px);
+    border-radius: 10px;
+    border: 1px solid $secondary-light;
+    margin-left: 30px;
+    padding: 15px;
+    
+    &:focus {
+      outline: 0;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../constants.scss';
+
+.button {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: white;
+  background-color: $positive;
+  border: 1px solid $positive;
+  border-radius: 5px;
+  margin: 0;
+  padding: 7px 15px;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}

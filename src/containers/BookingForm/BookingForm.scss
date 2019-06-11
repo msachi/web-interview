@@ -1,0 +1,18 @@
+@import '../../constants.scss';
+
+.booking-form {
+  width: calc(100% - 24px);
+  max-width: 600px;
+  margin: 24px auto;
+
+  .main-title {
+    font-family: sans-serif;
+    font-size: 30px;
+    color: $bold-text-color;
+  }
+
+  .section-border {
+    border-bottom: $border-standard;
+    margin-bottom: 24px;
+  }
+}
