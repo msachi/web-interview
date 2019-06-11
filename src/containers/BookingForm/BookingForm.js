@@ -82,6 +82,67 @@ class BookingForm extends Component {
     })
   }
 
+  renderForm() {
+    return (
+      <Fragment>
+        <UserInfo userInfo={this.state.userInfo} />
+        <form onSubmit={e => this.onSubmitAppointment(e)}>
+          <SelectSection
+            title="Consultant Type"
+            options={getConsultantTypes(this.state.availableSlots).map(
+              type => ({
+                value: type,
+                title: formatTitle(type),
+              })
+            )}
+            selected={this.state.selectedConsultantType}
+            onChange={t =>
+              this.setState({
+                selectedConsultantType: t,
+                selectedAppointmentTime: getAppointmentTimes(
+                  this.state.availableSlots,
+                  t
+                )[0],
+              })
+            }
+          />
+          <SelectSection
+            title="Date & Time"
+            options={getAppointmentTimes(
+              this.state.availableSlots,
+              this.state.selectedConsultantType
+            ).map((time, i) => ({
+              value: time,
+              title: moment(time).calendar(),
+            }))}
+            selected={this.state.selectedAppointmentTime}
+            onChange={t => this.setState({ selectedAppointmentTime: t })}
+          />
+          <SelectSection
+            title="Appointment Type"
+            options={getAppointmentTypes(
+              this.state.availableSlots,
+              this.state.selectedAppointmentTime
+            ).map(type => ({
+              value: type,
+              title: formatTitle(type),
+            }))}
+            selected={this.state.selectedAppointmentType}
+            onChange={t => this.setState({ selectedAppointmentType: t })}
+          />
+          <NotesSection
+            title="Notes"
+            placeholder="Describe your symptoms"
+            text={this.state.noteText}
+            onChange={noteText => this.setState({ noteText })}
+          />
+          <div className="section-border" />
+          <Button title="Book" />
+        </form>
+      </Fragment>
+    )
+  }
+
   render() {
     if (this.state.loadingSlots) return null
 
@@ -94,62 +155,7 @@ class BookingForm extends Component {
             team to make an appointment.
           </h4>
         ) : (
-          <Fragment>
-            <UserInfo userInfo={this.state.userInfo} />
-            <form onSubmit={e => this.onSubmitAppointment(e)}>
-              <SelectSection
-                title="Consultant Type"
-                options={getConsultantTypes(this.state.availableSlots).map(
-                  type => ({
-                    value: type,
-                    title: formatTitle(type),
-                  })
-                )}
-                selected={this.state.selectedConsultantType}
-                onChange={t =>
-                  this.setState({
-                    selectedConsultantType: t,
-                    selectedAppointmentTime: getAppointmentTimes(
-                      this.state.availableSlots,
-                      t
-                    )[0],
-                  })
-                }
-              />
-              <SelectSection
-                title="Date & Time"
-                options={getAppointmentTimes(
-                  this.state.availableSlots,
-                  this.state.selectedConsultantType
-                ).map((time, i) => ({
-                  value: time,
-                  title: moment(time).calendar(),
-                }))}
-                selected={this.state.selectedAppointmentTime}
-                onChange={t => this.setState({ selectedAppointmentTime: t })}
-              />
-              <SelectSection
-                title="Appointment Type"
-                options={getAppointmentTypes(
-                  this.state.availableSlots,
-                  this.state.selectedAppointmentTime
-                ).map(type => ({
-                  value: type,
-                  title: formatTitle(type),
-                }))}
-                selected={this.state.selectedAppointmentType}
-                onChange={t => this.setState({ selectedAppointmentType: t })}
-              />
-              <NotesSection
-                title="Notes"
-                placeholder="Describe your symptoms"
-                text={this.state.noteText}
-                onChange={noteText => this.setState({ noteText })}
-              />
-              <div className="section-border" />
-              <Button title="Book" />
-            </form>
-          </Fragment>
+          this.renderForm()
         )}
       </div>
     )
