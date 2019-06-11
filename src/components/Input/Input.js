@@ -12,7 +12,11 @@ const Input = props => (
         checked={props.checked}
         id={`input-${props.title}`}
       />
-      <span className={props.checked ? 'input--active' : ''}>
+      <span
+        className={
+          props.checked ? 'input-title input-title--active' : 'input-title'
+        }
+      >
         {props.title}
       </span>
     </label>

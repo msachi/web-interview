@@ -5,22 +5,22 @@
   margin-right: $gutter-size--large;
   list-style: none;
 
-  span {
+  .input-title {
     display: inline-block;
     background-color: white;
     border: $border-standard;
     border-radius: 20px;
     padding: 8px 14px;
     cursor: pointer;
+
+    &--active {
+      color: white;
+      border-color: $positive;
+      background-color: $positive;
+    }
   }
 
   input[type='radio'] {
     display: none;
-  }
-
-  .input--active {
-    color: white;
-    border-color: $positive;
-    background-color: $positive;
   }
 }

@@ -106,7 +106,15 @@ class BookingForm extends Component {
                   })
                 )}
                 selected={this.state.selectedConsultantType}
-                onChange={t => this.setState({ selectedConsultantType: t })}
+                onChange={t =>
+                  this.setState({
+                    selectedConsultantType: t,
+                    selectedAppointmentTime: getAppointmentTimes(
+                      this.state.availableSlots,
+                      t
+                    )[0],
+                  })
+                }
               />
               <SelectSection
                 title="Date & Time"
