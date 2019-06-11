@@ -7,10 +7,11 @@
 
   .input-title {
     display: inline-block;
+    color: $secondary-dark;
     background-color: white;
     border: $border-standard;
     border-radius: 20px;
-    padding: 8px 14px;
+    padding: 6px 14px;
     cursor: pointer;
 
     &--active {

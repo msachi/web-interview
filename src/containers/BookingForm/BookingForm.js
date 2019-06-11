@@ -87,7 +87,7 @@ class BookingForm extends Component {
 
     return (
       <div className="booking-form">
-        <h2 className="main-title">New appointment</h2>
+        <h2 className="main-title">New Appointment</h2>
         {this.state.error ? (
           <h4>
             Sorry, there was an error retrieving appointments! Please call our
@@ -147,7 +147,7 @@ class BookingForm extends Component {
                 onChange={noteText => this.setState({ noteText })}
               />
               <div className="section-border" />
-              <Button title="Book appointment" />
+              <Button title="Book" />
             </form>
           </Fragment>
         )}
