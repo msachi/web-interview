@@ -5,7 +5,7 @@ import moment from 'moment'
 import UserInfo from '../../components/UserInfo/UserInfo'
 import SelectSection from '../../components/SelectSection/SelectSection'
 import NotesSection from '../../components/NotesSection/NotesSection'
-import SubmitButton from '../../components/Button/SubmitButton'
+import Button from '../../components/Button/Button'
 import {
   formatTitle,
   getConsultantTypes,
@@ -99,47 +99,47 @@ class BookingForm extends Component {
             <form onSubmit={e => this.onSubmitAppointment(e)}>
               <SelectSection
                 title="Consultant Type"
-                buttons={getConsultantTypes(this.state.availableSlots).map(
+                options={getConsultantTypes(this.state.availableSlots).map(
                   type => ({
+                    value: type,
                     title: formatTitle(type),
-                    onClick: () =>
-                      this.setState({ selectedConsultantType: type }),
-                    active: this.state.selectedConsultantType === type,
                   })
                 )}
+                selected={this.state.selectedConsultantType}
+                onChange={t => this.setState({ selectedConsultantType: t })}
               />
               <SelectSection
                 title="Date & Time"
-                buttons={getAppointmentTimes(
+                options={getAppointmentTimes(
                   this.state.availableSlots,
                   this.state.selectedConsultantType
                 ).map((time, i) => ({
+                  value: time,
                   title: moment(time).calendar(),
-                  onClick: () =>
-                    this.setState({ selectedAppointmentTime: time }),
-                  active: this.state.selectedAppointmentTime === time,
                 }))}
+                selected={this.state.selectedAppointmentTime}
+                onChange={t => this.setState({ selectedAppointmentTime: t })}
               />
               <SelectSection
                 title="Appointment Type"
-                buttons={getAppointmentTypes(
+                options={getAppointmentTypes(
                   this.state.availableSlots,
                   this.state.selectedAppointmentTime
                 ).map(type => ({
+                  value: type,
                   title: formatTitle(type),
-                  onClick: () =>
-                    this.setState({ selectedAppointmentType: type }),
-                  active: this.state.selectedAppointmentType === type,
                 }))}
+                selected={this.state.selectedAppointmentType}
+                onChange={t => this.setState({ selectedAppointmentType: t })}
               />
               <NotesSection
                 title="Notes"
                 placeholder="Describe your symptoms"
                 text={this.state.noteText}
-                onTextChange={noteText => this.setState({ noteText })}
+                onChange={noteText => this.setState({ noteText })}
               />
               <div className="section-border" />
-              <SubmitButton title="Book appointment" />
+              <Button title="Book appointment" />
             </form>
           </Fragment>
         )}
@@ -149,7 +149,7 @@ class BookingForm extends Component {
 }
 
 BookingForm.propTypes = {
-  userId: PropTypes.string,
+  userId: PropTypes.number,
   userInfo: PropTypes.object,
 }
 

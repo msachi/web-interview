@@ -8,20 +8,20 @@ test('Renders SelectSection correctly', () => {
   const container = render(
     <SelectSection
       title="Consultant Type"
-      buttons={[
+      options={[
         {
           title: 'GP',
-          onClick: () => {},
+          onChange: () => {},
           active: true,
         },
         {
           title: 'Specialist',
-          onClick: () => {},
+          onChange: () => {},
           active: false,
         },
         {
           title: 'Therapist',
-          onClick: () => {},
+          onChange: () => {},
           active: false,
         },
       ]}

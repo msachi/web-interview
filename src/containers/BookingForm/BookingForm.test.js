@@ -61,14 +61,16 @@ test('getAppointmentTypes works as expected', () => {
 
 test('Renders correct options and submits correct appointment data', async () => {
   const userInfo = data.users[0]
-  const { getByText, getByPlaceholderText } = render(
+  const { getByText, getByLabelText, getByPlaceholderText } = render(
     <BookingForm userInfo={userInfo} />
   )
 
-  const specialistButton = await waitForElement(() => getByText('Specialist'))
+  const specialistButton = await waitForElement(() =>
+    getByLabelText('Specialist')
+  )
 
-  const timeButton = getByText('1st Dec at 14:16')
-  const audioButton = getByText('Audio')
+  const timeButton = getByLabelText('1st Dec at 14:16')
+  const audioButton = getByLabelText('Audio')
   const notesBox = getByPlaceholderText('Describe your symptoms')
   const submitButton = getByText('Book appointment')
 

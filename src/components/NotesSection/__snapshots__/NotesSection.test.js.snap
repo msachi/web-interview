@@ -5,11 +5,12 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
+      <fieldset
         class="notes-section"
       >
-        <div
+        <label
           class="header"
+          for="notes"
         >
           <img
             alt="Section icon"
@@ -21,22 +22,25 @@ Object {
           >
             Notes
           </h4>
-        </div>
+        </label>
         <textarea
           class="textbox"
+          id="notes"
+          name="notes"
           placeholder="Type in here"
         >
           Current text
         </textarea>
-      </div>
+      </fieldset>
     </div>
   </body>,
   "container": <div>
-    <div
+    <fieldset
       class="notes-section"
     >
-      <div
+      <label
         class="header"
+        for="notes"
       >
         <img
           alt="Section icon"
@@ -48,14 +52,16 @@ Object {
         >
           Notes
         </h4>
-      </div>
+      </label>
       <textarea
         class="textbox"
+        id="notes"
+        name="notes"
         placeholder="Type in here"
       >
         Current text
       </textarea>
-    </div>
+    </fieldset>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

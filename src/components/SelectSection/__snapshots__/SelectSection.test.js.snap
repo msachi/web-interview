@@ -5,10 +5,10 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
+      <fieldset
         class="select-section"
       >
-        <div
+        <legend
           class="header"
         >
           <img
@@ -21,37 +21,76 @@ Object {
           >
             Consultant Type
           </h4>
-        </div>
-        <div
-          class="button-wrapper"
+        </legend>
+        <ul
+          class="options-wrapper"
         >
-          <button
-            class="button button--active"
-            type="button"
+          <li
+            class="input-wrapper"
           >
-            GP
-          </button>
-          <button
-            class="button"
-            type="button"
+            <label
+              for="input-GP"
+            >
+              <input
+                checked=""
+                id="input-GP"
+                type="radio"
+                value=""
+              />
+              <span
+                class="input--active"
+              >
+                GP
+              </span>
+            </label>
+          </li>
+          <li
+            class="input-wrapper"
           >
-            Specialist
-          </button>
-          <button
-            class="button"
-            type="button"
+            <label
+              for="input-Specialist"
+            >
+              <input
+                checked=""
+                id="input-Specialist"
+                type="radio"
+                value=""
+              />
+              <span
+                class="input--active"
+              >
+                Specialist
+              </span>
+            </label>
+          </li>
+          <li
+            class="input-wrapper"
           >
-            Therapist
-          </button>
-        </div>
-      </div>
+            <label
+              for="input-Therapist"
+            >
+              <input
+                checked=""
+                id="input-Therapist"
+                type="radio"
+                value=""
+              />
+              <span
+                class="input--active"
+              >
+                Therapist
+              </span>
+            </label>
+          </li>
+        </ul>
+      </fieldset>
     </div>
   </body>,
   "container": <div>
-    <div
+    <fieldset
       class="select-section"
     >
-      <div
+      <legend
         class="header"
       >
         <img
@@ -64,30 +103,69 @@ Object {
         >
           Consultant Type
         </h4>
-      </div>
-      <div
-        class="button-wrapper"
+      </legend>
+      <ul
+        class="options-wrapper"
       >
-        <button
-          class="button button--active"
-          type="button"
+        <li
+          class="input-wrapper"
         >
-          GP
-        </button>
-        <button
-          class="button"
-          type="button"
+          <label
+            for="input-GP"
+          >
+            <input
+              checked=""
+              id="input-GP"
+              type="radio"
+              value=""
+            />
+            <span
+              class="input--active"
+            >
+              GP
+            </span>
+          </label>
+        </li>
+        <li
+          class="input-wrapper"
         >
-          Specialist
-        </button>
-        <button
-          class="button"
-          type="button"
+          <label
+            for="input-Specialist"
+          >
+            <input
+              checked=""
+              id="input-Specialist"
+              type="radio"
+              value=""
+            />
+            <span
+              class="input--active"
+            >
+              Specialist
+            </span>
+          </label>
+        </li>
+        <li
+          class="input-wrapper"
         >
-          Therapist
-        </button>
-      </div>
-    </div>
+          <label
+            for="input-Therapist"
+          >
+            <input
+              checked=""
+              id="input-Therapist"
+              type="radio"
+              value=""
+            />
+            <span
+              class="input--active"
+            >
+              Therapist
+            </span>
+          </label>
+        </li>
+      </ul>
+    </fieldset>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

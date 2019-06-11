@@ -1,23 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders Button correctly 1`] = `
+exports[`Renders Input correctly 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <button
-        class="button"
+      <li
+        class="input-wrapper"
       >
-        Click me
-      </button>
+        <label
+          for="input-Click me"
+        >
+          <input
+            id="input-Click me"
+            type="radio"
+            value=""
+          />
+          <span
+            class=""
+          >
+            Click me
+          </span>
+        </label>
+      </li>
     </div>
   </body>,
   "container": <div>
-    <button
-      class="button"
+    <li
+      class="input-wrapper"
     >
-      Click me
-    </button>
+      <label
+        for="input-Click me"
+      >
+        <input
+          id="input-Click me"
+          type="radio"
+          value=""
+        />
+        <span
+          class=""
+        >
+          Click me
+        </span>
+      </label>
+    </li>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],

@@ -1,33 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '../Button/Button'
+import Input from '../Input/Input'
 
 import './SelectSection.scss'
 import icon from '../../images/icon.png'
 
 const SelectSection = props => (
-  <div className="select-section">
-    <div className="header">
+  <fieldset className="select-section">
+    <legend className="header">
       <img className="icon" src={icon} alt="Section icon" />
       <h4 className="title">{props.title}</h4>
-    </div>
-    <div className="button-wrapper">
-      {props.buttons.map(b => (
-        <Button
+    </legend>
+    <ul
+      className="options-wrapper"
+      onChange={e => props.onChange(e.target.value)}
+    >
+      {props.options.map(b => (
+        <Input
           key={b.title}
-          onClick={b.onClick}
+          value={b.value}
           title={b.title}
-          active={b.active}
+          checked={props.selected === b.value}
         />
       ))}
-    </div>
-  </div>
+    </ul>
+  </fieldset>
 )
 
 SelectSection.propTypes = {
   title: PropTypes.string,
-  buttons: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(PropTypes.object),
+  selected: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 export default SelectSection

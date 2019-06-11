@@ -5,25 +5,27 @@ import './NotesSection.scss'
 import icon from '../../images/icon.png'
 
 const NotesSection = props => (
-  <div className="notes-section">
-    <div className="header">
+  <fieldset className="notes-section">
+    <label className="header" htmlFor="notes">
       <img className="icon" src={icon} alt="Section icon" />
       <h4 className="title">{props.title}</h4>
-    </div>
+    </label>
     <textarea
+      name="notes"
+      id="notes"
       className="textbox"
       placeholder={props.placeholder}
       value={props.text}
-      onChange={e => props.onTextChange(e.target.value)}
+      onChange={e => props.onChange(e.target.value)}
     />
-  </div>
+  </fieldset>
 )
 
 NotesSection.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   placeholder: PropTypes.string,
-  onTextChange: PropTypes.func,
+  onChange: PropTypes.func,
 }
 
 export default NotesSection
