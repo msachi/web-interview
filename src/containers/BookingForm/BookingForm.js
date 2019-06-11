@@ -2,14 +2,19 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { API_ENDPOINT } from '../../config'
-
 import UserInfo from '../../components/UserInfo/UserInfo'
 import SelectSection from '../../components/SelectSection/SelectSection'
 import NotesSection from '../../components/NotesSection/NotesSection'
 import SubmitButton from '../../components/Button/SubmitButton'
+import {
+  formatTitle,
+  getConsultantTypes,
+  getAppointmentTimes,
+  getAppointmentTypes,
+} from './helpers'
 
 import './BookingForm.scss'
+import { API_ENDPOINT } from '../../config'
 
 moment.updateLocale('en', {
   calendar: {
@@ -60,34 +65,6 @@ class BookingForm extends Component {
       )
   }
 
-  formatTitle(title) {
-    if (title === 'gp') return 'GP'
-    return title.charAt(0).toUpperCase() + title.slice(1)
-  }
-
-  getConsultantTypes() {
-    const consultants = this.state.availableSlots.reduce(
-      (acc, curr) => acc.concat(curr.consultantType),
-      []
-    )
-    return [...new Set(consultants)]
-  }
-
-  getAppointmentTimes() {
-    return this.state.availableSlots
-      .filter(slot =>
-        slot.consultantType.includes(this.state.selectedConsultantType)
-      )
-      .map(slot => slot.time)
-  }
-
-  getAppointmentTypes() {
-    if (!this.state.selectedSlot) return ['video', 'audio']
-    return this.state.availableSlots
-      .find(slot => slot.time === this.state.selectedSlot)
-      .appointmentType.sort((a, b) => b.localeCompare - a.localeCompare)
-  }
-
   onSubmitAppointment(e) {
     e.preventDefault()
     return fetch(`${API_ENDPOINT}/appointments`, {
@@ -122,16 +99,21 @@ class BookingForm extends Component {
             <form onSubmit={e => this.onSubmitAppointment(e)}>
               <SelectSection
                 title="Consultant Type"
-                buttons={this.getConsultantTypes().map(type => ({
-                  title: this.formatTitle(type),
-                  onClick: () =>
-                    this.setState({ selectedConsultantType: type }),
-                  active: this.state.selectedConsultantType === type,
-                }))}
+                buttons={getConsultantTypes(this.state.availableSlots).map(
+                  type => ({
+                    title: formatTitle(type),
+                    onClick: () =>
+                      this.setState({ selectedConsultantType: type }),
+                    active: this.state.selectedConsultantType === type,
+                  })
+                )}
               />
               <SelectSection
                 title="Date & Time"
-                buttons={this.getAppointmentTimes().map((time, i) => ({
+                buttons={getAppointmentTimes(
+                  this.state.availableSlots,
+                  this.state.selectedConsultantType
+                ).map((time, i) => ({
                   title: moment(time).calendar(),
                   onClick: () =>
                     this.setState({ selectedAppointmentTime: time }),
@@ -140,8 +122,11 @@ class BookingForm extends Component {
               />
               <SelectSection
                 title="Appointment Type"
-                buttons={this.getAppointmentTypes().map(type => ({
-                  title: this.formatTitle(type),
+                buttons={getAppointmentTypes(
+                  this.state.availableSlots,
+                  this.state.selectedAppointmentTime
+                ).map(type => ({
+                  title: formatTitle(type),
                   onClick: () =>
                     this.setState({ selectedAppointmentType: type }),
                   active: this.state.selectedAppointmentType === type,

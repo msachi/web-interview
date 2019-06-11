@@ -1,10 +1,11 @@
 import React from 'react'
 import { render, cleanup, waitForElement } from '@testing-library/react'
 
+import App from './App'
+import { getUserInitials } from './helpers'
+
 import data from '../../../data/data.json'
 import { API_ENDPOINT } from '../../config'
-
-import App from './App'
 
 afterEach(() => {
   cleanup()
@@ -21,6 +22,13 @@ global.fetch = jest.fn().mockImplementation(url => {
     status: 200,
     json: () => Promise.resolve(mockData[url]),
   })
+})
+
+test('getUserInitials works as expected', () => {
+  expect(getUserInitials({ firstName: 'Jane', lastName: 'Doe' }, null)).toBe(
+    'JD'
+  )
+  expect(getUserInitials({}, 'error')).toBe('??')
 })
 
 test('Fetches and renders user info correctly', async () => {

@@ -10,6 +10,12 @@ import data from '../../../data/data.json'
 import { API_ENDPOINT } from '../../config'
 
 import BookingForm from './BookingForm'
+import {
+  formatTitle,
+  getConsultantTypes,
+  getAppointmentTimes,
+  getAppointmentTypes,
+} from './helpers'
 
 afterEach(() => {
   cleanup()
@@ -26,6 +32,31 @@ global.fetch = jest.fn().mockImplementation(url => {
     status: 200,
     json: () => Promise.resolve(mockData[url]),
   })
+})
+
+test('formatTitle works as expected', () => {
+  expect(formatTitle('specialist')).toBe('Specialist')
+  expect(formatTitle('gp')).toBe('GP')
+})
+
+test('getConsultantTypes works as expected', () => {
+  expect(getConsultantTypes(data.availableSlots)).toEqual([
+    'gp',
+    'specialist',
+    'therapist',
+  ])
+})
+
+test('getAppointmentTimes works as expected', () => {
+  expect(getAppointmentTimes(data.availableSlots, 'therapist')).toEqual([
+    '2019-11-16T16:18:30.000Z',
+  ])
+})
+
+test('getAppointmentTypes works as expected', () => {
+  expect(
+    getAppointmentTypes(data.availableSlots, '2019-11-16T16:18:30.000Z')
+  ).toEqual(['video', 'audio'])
 })
 
 test('Renders correct options and submits correct appointment data', async () => {

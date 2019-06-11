@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 
 import BookingForm from '../BookingForm/BookingForm'
 
+import { getUserInitials } from './helpers'
+import './App.scss'
 import burger from '../../images/burger.png'
 import logo from '../../images/logo.png'
-
-import './App.scss'
 
 import { API_ENDPOINT } from '../../config'
 
@@ -43,13 +43,6 @@ class App extends Component {
       )
   }
 
-  getUserInitials() {
-    if (this.state.error) return '??'
-
-    const { firstName, lastName } = this.state.userInfo
-    return firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase()
-  }
-
   render() {
     if (this.state.loadingUser) return null
 
@@ -58,7 +51,9 @@ class App extends Component {
         <div className="app-header">
           <img src={burger} className="header-image" alt="Menu" />
           <img src={logo} className="header-image" alt="Babylon Health" />
-          <div className="user-initials">{this.getUserInitials()}</div>
+          <div className="user-initials">
+            {getUserInitials(this.state.userInfo, this.state.error)}
+          </div>
         </div>
         {this.state.error ? (
           <h4 className="user-error">
