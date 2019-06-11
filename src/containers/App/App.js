@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import BookingForm from './containers/BookingForm/BookingForm'
+import BookingForm from '../BookingForm/BookingForm'
 
-import burger from './images/burger.png'
-import logo from './images/logo.png'
+import burger from '../../images/burger.png'
+import logo from '../../images/logo.png'
 
 import './App.scss'
 
-import { API_ENDPOINT } from './config'
+import { API_ENDPOINT } from '../../config'
 
 class App extends Component {
   constructor(props) {

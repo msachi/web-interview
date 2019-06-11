@@ -7,18 +7,12 @@ afterEach(cleanup)
 
 test('Renders normal Button correctly', () => {
   const container = render(
-    <Button
-      title="Click me"
-      active={true}
-      onClick={() => console.log('Hello')}
-    />
+    <Button title="Click me" active={true} onClick={() => {}} />
   )
   expect(container).toMatchSnapshot()
 })
 
 test('Renders submit button correctly', () => {
-  const container = render(
-    <SubmitButton title="Click me" onClick={() => console.log('Hello')} />
-  )
+  const container = render(<SubmitButton title="Click me" onClick={() => {}} />)
   expect(container).toMatchSnapshot()
 })

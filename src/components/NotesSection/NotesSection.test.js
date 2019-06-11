@@ -10,7 +10,7 @@ test('Renders NotesSection correctly', () => {
       title="Notes"
       text="Current text"
       placeholder="Type in here"
-      onTextChange={() => console.log('Hello')}
+      onTextChange={() => {}}
     />
   )
   expect(container).toMatchSnapshot()
