@@ -38,7 +38,7 @@ Object {
                 value=""
               />
               <span
-                class="input--active"
+                class="input-title input-title--active"
               >
                 GP
               </span>
@@ -57,7 +57,7 @@ Object {
                 value=""
               />
               <span
-                class="input--active"
+                class="input-title input-title--active"
               >
                 Specialist
               </span>
@@ -76,7 +76,7 @@ Object {
                 value=""
               />
               <span
-                class="input--active"
+                class="input-title input-title--active"
               >
                 Therapist
               </span>
@@ -120,7 +120,7 @@ Object {
               value=""
             />
             <span
-              class="input--active"
+              class="input-title input-title--active"
             >
               GP
             </span>
@@ -139,7 +139,7 @@ Object {
               value=""
             />
             <span
-              class="input--active"
+              class="input-title input-title--active"
             >
               Specialist
             </span>
@@ -158,7 +158,7 @@ Object {
               value=""
             />
             <span
-              class="input--active"
+              class="input-title input-title--active"
             >
               Therapist
             </span>

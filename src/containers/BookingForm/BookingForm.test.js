@@ -72,7 +72,7 @@ test('Renders correct options and submits correct appointment data', async () =>
   const timeButton = getByLabelText('1st Dec at 14:16')
   const audioButton = getByLabelText('Audio')
   const notesBox = getByPlaceholderText('Describe your symptoms')
-  const submitButton = getByText('Book appointment')
+  const submitButton = getByText('Book')
 
   fireEvent.click(specialistButton)
   fireEvent.click(timeButton)

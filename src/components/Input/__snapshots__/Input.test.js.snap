@@ -17,7 +17,7 @@ Object {
             value=""
           />
           <span
-            class=""
+            class="input-title"
           >
             Click me
           </span>
@@ -38,7 +38,7 @@ Object {
           value=""
         />
         <span
-          class=""
+          class="input-title"
         >
           Click me
         </span>
